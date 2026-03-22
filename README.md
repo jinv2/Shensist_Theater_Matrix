@@ -2,7 +2,7 @@
 title: Shensist Theater Matrix
 emoji: 🎭
 colorFrom: red
-colorTo: black
+colorTo: gray
 sdk: docker
 python_version: 3.9
 app_port: 7860
