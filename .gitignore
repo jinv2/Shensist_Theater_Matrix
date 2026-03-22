@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+ui_frontend/assets/*.mp3
+ui_frontend/assets/*.wav
+.env
+force_sync_now.py
+force_upload.py
+fix_btn.py
+auto_fix_logic.py
+force_*.py
+fix_btn.py
+force_*.py
+fix_btn.py
