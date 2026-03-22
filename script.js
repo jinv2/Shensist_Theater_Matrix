@@ -1,42 +1,52 @@
-// --- Shensist Matrix 2.0 终极演播内核 (功能复位版) ---
-console.log("🚀 Shensist Matrix 生产工厂已就位...");
+// --- Shensist Matrix 2.0 终极全能内核 ---
+console.log("🚀 Shensist Matrix 双模系统已就绪...");
 
 document.addEventListener('DOMContentLoaded', () => {
     const actionBtn = document.querySelector('.action-btn');
     const chatDisplay = document.querySelector('.chat-display');
     const modeBtns = document.querySelectorAll('.mode-btn');
-    const aiConsole = document.querySelector('.ai-producer-console'); // 控制面板容器
+    const aiConsole = document.querySelector('.ai-producer-console');
+    
+    let currentMode = '普通演示模式'; // 默认模式
 
-    // 1. 模式切换逻辑 (修复工厂面板显示)
+    // 1. 模式切换：精准控制面板显隐与状态
     modeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             modeBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            currentMode = btn.innerText.trim();
             
-            if (btn.innerText.includes('AI 生产工厂')) {
-                if(aiConsole) aiConsole.style.display = 'block'; // 显示三个框
-                console.log("进入：AI 生产工厂模式");
+            if (currentMode.includes('AI 生产工厂')) {
+                if(aiConsole) aiConsole.style.display = 'block';
+                console.log("切换至：工厂模式");
             } else {
-                if(aiConsole) aiConsole.style.display = 'none'; // 隐藏三个框
-                console.log("进入：普通演示模式");
+                if(aiConsole) aiConsole.style.display = 'none';
+                console.log("切换至：普通模式");
             }
         });
     });
 
-    // 2. 核心演播按钮 (ACTION) 逻辑
+    // 2. 演播核心 (ACTION)：根据模式执行不同灵魂
     if (actionBtn) {
         actionBtn.onclick = async () => {
-            if (chatDisplay) chatDisplay.innerText = "【系统】: 正在刺穿维度，同步 AI 逻辑...";
-            
-            // 模拟延迟感
+            if (!chatDisplay) return;
+
+            // 统一loading状态
+            chatDisplay.innerHTML = '<span style="color: #ff0000;">⏳ 正在调集维度资源...</span>';
+
             setTimeout(() => {
-                if (chatDisplay) {
-                    chatDisplay.innerText = "【九尾狐】: 灵愿循环已重塑！主理人，生产工厂已连接。\n【铁蝰蛇】: 维度屏障已移除，演播正式开启。";
+                if (currentMode.includes('AI 生产工厂')) {
+                    // 工厂模式逻辑
+                    chatDisplay.innerHTML = "【九尾狐】: 生产工厂逻辑已接入。\n【铁蝰蛇】: 正在根据主理人 Prompt 实时重塑山海经位面...";
+                } else {
+                    // 普通模式逻辑 (修复点)
+                    chatDisplay.innerHTML = "【九尾狐】: 灵愿循环正常运转。\n【系统】: 当前处于标准演播频率，全线逻辑同步完成。";
+                    alert("普通演播指令已确认！");
                 }
-            }, 800);
+            }, 600);
         };
     }
 });
 
-// 3. 拦截所有底层报错，确保界面不卡死
+// 3. 错误拦截
 window.onerror = () => true;
