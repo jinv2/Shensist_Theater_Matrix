@@ -1,3 +1,12 @@
+---
+title: Shensist Theater Matrix
+emoji: 🎭
+colorFrom: red
+colorTo: black
+sdk: docker
+pinned: false
+---
+
 # Shensist Theater Matrix
 
 Shensist Theater Matrix 是一款旨在“赋予智能体场景灵魂”的智能体演播室。
