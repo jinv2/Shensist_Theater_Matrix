@@ -1,7 +1,9 @@
 let currentMode = 'normal'; // 🎬 默认为普通模式
 
-// ⚡ 核心修正：统一 API 地址到本地 7860 端口 (Hugging Face 默认)
-const API_URL = "http://127.0.0.1:7860/theater"; 
+// ⚡ 核心修正：自动适配本地与生产 (Hugging Face) 环境
+const API_URL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" 
+    ? "http://127.0.0.1:7860/theater" 
+    : "https://jinv2-shensist-theater-matrix.hf.space/theater"; 
 
 function setMode(mode) {
     currentMode = mode;
