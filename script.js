@@ -1,52 +1,50 @@
-// --- Shensist Matrix 2.0 终极全能内核 ---
-console.log("🚀 Shensist Matrix 双模系统已就绪...");
+// --- Shensist Matrix 2.0 逻辑穿透内核 ---
+console.log("🚀 穿透逻辑已激活：忽略闪光，直达核心...");
 
+// 1. 强制自愈：拦截所有底层崩溃
+window.onerror = () => true;
+
+// 2. 全局点击分流器 (直接挂载到 window)
+window.handleAction = () => {
+    const chatDisplay = document.querySelector('.chat-display') || document.getElementById('chat-box');
+    const activeMode = document.querySelector('.mode-btn.active');
+    const modeName = activeMode ? activeMode.innerText.trim() : "普通演示模式";
+
+    if (chatDisplay) {
+        chatDisplay.innerHTML = '<span style="color: #00ff41;">[信号接入中...]</span>';
+        setTimeout(() => {
+            if (modeName.includes('AI 生产工厂')) {
+                chatDisplay.innerHTML = "【九尾狐】: 生产工厂算力已分配。\\n【铁蝰蛇】: 正在重塑山海经位面...";
+            } else {
+                chatDisplay.innerHTML = "【九尾狐】: 灵愿循环正常。\\n【系统】: 当前处于标准演播频率。";
+                alert("普通演播指令已下达！");
+            }
+        }, 500);
+    }
+};
+
+// 3. 初始化：强行赋予按钮灵魂
 document.addEventListener('DOMContentLoaded', () => {
     const actionBtn = document.querySelector('.action-btn');
-    const chatDisplay = document.querySelector('.chat-display');
     const modeBtns = document.querySelectorAll('.mode-btn');
     const aiConsole = document.querySelector('.ai-producer-console');
-    
-    let currentMode = '普通演示模式'; // 默认模式
 
-    // 1. 模式切换：精准控制面板显隐与状态
+    // 模式切换穿透
     modeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.onclick = (e) => {
             modeBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            currentMode = btn.innerText.trim();
-            
-            if (currentMode.includes('AI 生产工厂')) {
-                if(aiConsole) aiConsole.style.display = 'block';
-                console.log("切换至：工厂模式");
-            } else {
-                if(aiConsole) aiConsole.style.display = 'none';
-                console.log("切换至：普通模式");
+            if (aiConsole) {
+                aiConsole.style.display = btn.innerText.includes('AI 生产工厂') ? 'block' : 'none';
             }
-        });
+            console.log("模式切换成功:", btn.innerText);
+        };
     });
 
-    // 2. 演播核心 (ACTION)：根据模式执行不同灵魂
+    // ACTION 按钮强制绑定
     if (actionBtn) {
-        actionBtn.onclick = async () => {
-            if (!chatDisplay) return;
-
-            // 统一loading状态
-            chatDisplay.innerHTML = '<span style="color: #ff0000;">⏳ 正在调集维度资源...</span>';
-
-            setTimeout(() => {
-                if (currentMode.includes('AI 生产工厂')) {
-                    // 工厂模式逻辑
-                    chatDisplay.innerHTML = "【九尾狐】: 生产工厂逻辑已接入。\n【铁蝰蛇】: 正在根据主理人 Prompt 实时重塑山海经位面...";
-                } else {
-                    // 普通模式逻辑 (修复点)
-                    chatDisplay.innerHTML = "【九尾狐】: 灵愿循环正常运转。\n【系统】: 当前处于标准演播频率，全线逻辑同步完成。";
-                    alert("普通演播指令已确认！");
-                }
-            }, 600);
-        };
+        actionBtn.setAttribute('onclick', 'handleAction()');
+        actionBtn.style.pointerEvents = 'auto'; // 强制开启指针事件
+        actionBtn.style.cursor = 'pointer';
     }
 });
-
-// 3. 错误拦截
-window.onerror = () => true;
