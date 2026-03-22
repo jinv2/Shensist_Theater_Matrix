@@ -35,21 +35,12 @@ async def get_voice_base64(text, role_id):
     """瞬间将文字转为 Base64 音频，不留痕迹"""
     # 自动匹配音色矩阵 (适配 actor_id 或 role_id)
     v_name = "zh-CN-YunxiNeural" if ("viper" in role_id or "left" in role_id) else "zh-CN-XiaoyiNeural"
-    try:
-        communicate = edge_tts.Communicate(text, v_name)
-        audio_data = b""
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                audio_data += chunk["data"]
-        return base64.b64encode(audio_data).decode('utf-8')
-    except Exception as e:
-        print(f"❌ [Voice-Error] {role_id} 合成失败: {e}")
-        return None
-
-async def process_script_voices(script_data):
-    """并行处理所有台词的语音合成"""
-    tasks = [get_voice_base64(item['text'], item['actor_id']) for item in script_data]
-    return await asyncio.gather(*tasks)
+    communicate = edge_tts.Communicate(text, v_name)
+    audio_data = b""
+    async for chunk in communicate.stream():
+        if chunk["type"] == "audio":
+            audio_data += chunk["data"]
+    return base64.b64encode(audio_data).decode('utf-8')
 
 @app.route('/theater', methods=['POST'])
 def theater_logic():
@@ -80,28 +71,23 @@ def theater_logic():
 
     final_script = []
 
-    # 🎙️ 2. 内存级全同步并行语音生成 (Base64)
-    print(f"🎙️ [Memory-Voice] 正在并行合成 {len(script_data)} 句台词...")
+    # 🎙️ 2. 内存级全同步语音生成 (Base64)
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
     try:
-        # 使用 asyncio.run 自动处理循环生命周期 (更安全稳定)
-        b64_results = asyncio.run(process_script_voices(script_data))
-        
-        for i, b64_audio in enumerate(b64_results):
-            item = script_data[i]
+        for i, item in enumerate(script_data):
+            role_id = item['actor_id']
+            print(f"🎙️ [Memory-Voice] 正在为 {item['actor_id']} 合成: {item['text'][:15]}...")
+            
+            b64_audio = loop.run_until_complete(get_voice_base64(item['text'], role_id))
             final_script.append({
                 "actor_id": item['actor_id'],
                 "text": item['text'],
-                "audio_data": f"data:audio/mp3;base64,{b64_audio}" if b64_audio else ""
+                "audio_data": f"data:audio/mp3;base64,{b64_audio}"
             })
-    except Exception as e:
-        print(f"❌ [Backend-Error] 语音处理阶段崩溃: {e}")
-        # 即使语音完全失败，也至少返回文字剧本
-        for item in script_data:
-            final_script.append({
-                "actor_id": item['actor_id'],
-                "text": item['text'],
-                "audio_data": ""
-            })
+    finally:
+        loop.close()
     
     return jsonify(final_script)
 

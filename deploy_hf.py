@@ -7,8 +7,8 @@ import importlib
 importlib.reload(sys)
 
 # 物理参数配置
-TOKEN = os.getenv("HF_TOKEN")  # 从环境变量获取 Token
-REPO_ID = "jinv2/Shensist_Theater_Matrix" # 修正为正确的 Space ID
+TOKEN = "你的_HF_TOKEN"  # ⚡架构师，请在此填入真实的 Token
+REPO_ID = "jinv2-shensist-theater-matrix" # 修正为正确的 Space ID
 
 api = HfApi()
 

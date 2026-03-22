@@ -1,0 +1,26 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7860
+ * Running on http://172.18.0.1:7860
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [22/Mar/2026 15:31:13] "OPTIONS /theater HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:31:27] "POST /theater HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET /assets/logo_ts.webp HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET /assets/avatar_viper.webp HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET /script.js HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "GET /assets/avatar_fox.webp HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:32:40] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/Mar/2026 15:35:27] "POST /theater HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:35:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [22/Mar/2026 15:46:45] "[36mGET / HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:46:46] "[36mGET /style.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:46:46] "[36mGET /assets/logo_ts.webp HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:46:46] "[36mGET /assets/avatar_viper.webp HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:46:46] "[36mGET /assets/avatar_fox.webp HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:46:46] "[36mGET /script.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [22/Mar/2026 15:47:07] "POST /theater HTTP/1.1" 200 -
+127.0.0.1 - - [22/Mar/2026 15:47:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
